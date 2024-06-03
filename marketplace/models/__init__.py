@@ -3,3 +3,4 @@ from marketplace.models.product import Product, ProductDetail
 from marketplace.models.supplier import Supplier
 from marketplace.models.address import Address
 from marketplace.models.customer import Customer
+from marketplace.models.order import Order, OrderItem
