@@ -14,9 +14,9 @@ from marketplace.models import (
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ('name',)
-    search_fields = ('name',)
-    ordering = ('name',)
+    list_display = ('name',)  # список отображаемых полей
+    search_fields = ('name',)  # список полей, по которым можно делать поиск
+    ordering = ('name',)  # сортировка категорий по имени в алфавитном порядке
 
 
 @admin.register(Supplier)
@@ -28,7 +28,7 @@ class SupplierAdmin(admin.ModelAdmin):
 
 class ProductDetailInline(admin.StackedInline):
     model = ProductDetail
-    can_delete = False
+    can_delete = True  # устанавливаем настройку, что нельзя будет удалять связаные объекты напрямую из интерфейса
     verbose_name_plural = 'Product Details'
 
 
@@ -66,6 +66,10 @@ class OrderItemInline(admin.TabularInline):
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
     list_display = ('id', 'order_date', 'customer')
-    search_fields = ('customer__first_name', 'customer__last_name', 'customer__email')
+    search_fields = ('customer__first_name', 'customer__last_name', 'customer__email')  # Тут мы для поиска
+    # указали поля, которые являются вторичными ключами - customer. Обычно искать данные по вторичным
+    # ключам напрямую мы не можем. Так что нужно указывать сперва название вторичного ключа, два
+    # нижних подчёркивания, название конкретного поля из этого объекта, по которому хотим устроить
+    # поиск. Поэтому тут строятся поля customer__first_name, customer__last_name и прочие
     ordering = ('-order_date',)
     inlines = [OrderItemInline]

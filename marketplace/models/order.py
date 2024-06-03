@@ -18,7 +18,7 @@ class Order(models.Model):
     order_date = models.DateTimeField(auto_now_add=True)
     customer = models.ForeignKey(
         'Customer',
-        on_delete=models.PROTECT,
+        on_delete=models.PROTECT,  # Удаление будет запрещено. Все объекты заказов защищены
         related_name='orders'
     )
 
@@ -46,12 +46,12 @@ class Order(models.Model):
 class OrderItem(models.Model):
     order = models.ForeignKey(
         Order,
-        on_delete=models.CASCADE,
+        on_delete=models.CASCADE,  # при удалении заказа вся информация о нём должна каскадно удаляться
         related_name='order_items'
     )
     product = models.ForeignKey(
         'Product',
-        on_delete=models.PROTECT,
+        on_delete=models.PROTECT,  # Если пытаемся уделить продукт - получаем сообщение о запрете
         related_name='order_items'
     )
     quantity = models.PositiveSmallIntegerField()
