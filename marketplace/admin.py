@@ -51,8 +51,8 @@ class AddressAdmin(admin.ModelAdmin):
 
 @admin.register(Customer)
 class CustomerAdmin(admin.ModelAdmin):
-    list_display = ('first_name', 'last_name', 'email', 'phone', 'date_joined', 'deleted')
-    search_fields = ('first_name', 'last_name', 'email', 'phone')
+    list_display = ('first_name', 'last_name', 'email', 'phone_number', 'date_joined', 'deleted')
+    search_fields = ('first_name', 'last_name', 'email', 'phone_number')
     ordering = ('-date_joined',)
     list_filter = ('deleted',)
     list_editable = ('deleted',)
