@@ -15,9 +15,6 @@ class ProductDetailSerializer(serializers.ModelSerializer):
 
 
 class ProductCreateSerializer(serializers.ModelSerializer):
-    category = serializers.IntegerField(write_only=True)
-    supplier = serializers.IntegerField(write_only=True)
-
     class Meta:
         model = Product
         fields = "__all__"
